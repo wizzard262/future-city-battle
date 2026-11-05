@@ -220,6 +220,7 @@ var SoundCache = {};
 
 // Called from preload: sound files to load, or sounds made in code put straight into the cache
 function LoadThemeSounds() {
+	WakeSoundOnTouch();
 	var s = THEME.sounds;
 	if (s.files) {
 		Object.keys(s.files).forEach(function (name) {
@@ -237,6 +238,21 @@ function LoadThemeSounds() {
 			game.cache.decodedSound(name, buffer);
 		});
 	}
+}
+
+// A phone can keep the sound engine asleep until the player touches the screen, and this old Phaser
+// never wakes it on Android: wake it on every tap, click and key press
+function WakeSoundOnTouch() {
+	var context = game.sound.context;
+	if (!context)
+		return;
+	var wake = function () {
+		if (context.state != 'running')
+			context.resume();
+	};
+	['touchend', 'mouseup', 'keydown'].forEach(function (eventName) {
+		document.addEventListener(eventName, wake, true);
+	});
 }
 
 // Play a sound by name at the theme's volume for it (or full). Unknown names are silent.

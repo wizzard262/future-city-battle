@@ -9,7 +9,7 @@ using Showdown;
 
 namespace Showdown
 {
-    [Activity(Label = "Showdown", MainLauncher = true, Exported = true, Icon = "@drawable/icon",
+    [Activity(Label = "Future City Battle", MainLauncher = true, Exported = true, Icon = "@drawable/icon",
         Theme = "@android:style/Theme.Material.NoActionBar", ScreenOrientation = ScreenOrientation.SensorLandscape)]
     public class MainActivity : Activity
     {
@@ -29,6 +29,8 @@ namespace Showdown
             localWebView.SetWebViewClient(new WebViewClient());
             localWebView.Settings.JavaScriptEnabled = true;
             localWebView.Settings.DomStorageEnabled = true;
+            // The game's sounds start from its own timers as well as from taps, so don't make them wait for a tap
+            localWebView.Settings.MediaPlaybackRequiresUserGesture = false;
 
             localWebView.Settings.AllowContentAccess = true;
             localWebView.Settings.AllowFileAccess = true;

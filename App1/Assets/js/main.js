@@ -38,7 +38,7 @@ BasicGame.Boot.prototype = {
 		//=== background
 		game.add.tileSprite(0, 0, 1200, 800, 'background');
 		AddFlickers();
-		game.add.bitmapText(10, 10, 'fontBlue', 'v3', 16);
+		game.add.bitmapText(10, 10, 'fontBlue', 'v4', 16);
 
 		//=== sprite groups, back to front
 		isoGroupBackground = game.add.group();
